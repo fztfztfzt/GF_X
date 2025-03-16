@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
     {
         Instance = this;
         mainCam = Camera.main;
+        followerVCamera.gameObject.SetActive(false);
     }
     private void OnEnable()
     {
@@ -60,7 +61,7 @@ public class CameraController : MonoBehaviour
         followerVCamera.gameObject.SetActive(true);
         followerVCamera.LookAt = target;
         followerVCamera.Follow = target;
-        mainCam.orthographic = false;
+        mainCam.orthographic = true;
         SetCameraView(1, false);
     }
 

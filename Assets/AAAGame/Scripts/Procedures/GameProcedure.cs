@@ -2,6 +2,8 @@
 using GameFramework.Procedure;
 using UnityGameFramework.Runtime;
 using GameFramework.Event;
+using UnityEngine;
+using System;
 
 
 public class GameProcedure : ProcedureBase
@@ -9,6 +11,7 @@ public class GameProcedure : ProcedureBase
     private GameUIForm m_GameUI;
     private LevelEntity m_Level;
     private IFsm<IProcedureManager> procedure;
+    PlayerEntity playerEntity;
 
     protected override async void OnEnter(IFsm<IProcedureManager> procedureOwner)
     {
@@ -20,20 +23,91 @@ public class GameProcedure : ProcedureBase
             GF.Base.ResumeGame();
         }
 
-        GF.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
-        GF.Event.Subscribe(CloseUIFormCompleteEventArgs.EventId, OnCloseUIForm);
-        GF.Event.Subscribe(GameplayEventArgs.EventId, OnGameplayEvent);
-        m_Level = procedureOwner.GetData<VarUnityObject>("LevelEntity").Value as LevelEntity;
-        procedureOwner.RemoveData("LevelEntity");
+        GF.Event.Subscribe(SwitchRoomEventArgs.EventId, SwitchRoom);
 
-        m_GameUI = await GF.UI.OpenUIFormAwait(UIViews.GameUIForm) as GameUIForm;
-        m_Level.StartGame();
+        GF.UI.CloseAllLoadingUIForms();
+        GF.UI.CloseAllLoadedUIForms();
+        GF.Entity.HideAllLoadingEntities();
+        GF.Entity.HideAllLoadedEntities();
+        InitGame();
     }
 
+    private async void InitGame()
+    {
+
+        GF.Floor.GenFloor();
+        ShowRooms();
+        var miniMap = await GF.UI.OpenUIFormAwait(UIViews.MiniMap) as MiniMapForm;
+        miniMap.RefreshAll();
+        GF.BuiltinView.HideLoadingProgress();
+    }
+
+    private async void ShowRooms()
+    {
+        var curPos = GF.Floor.GetCurRoomPos();
+        var roomType = GF.Floor.GetRoomType(curPos);
+        //从随机池中随机一个房间
+        var rooms = GF.Floor.Rooms;
+        var FloorWidth = GF.Floor.FloorWidth;
+        var FloorHeight = GF.Floor.FloorHeight;
+        for (int i = 1; i <= FloorWidth; i++)
+        {
+            for (int j = 1; j <= FloorHeight; j++)
+            {
+                var room = rooms[i, j];
+                if (room != null )
+                {
+                    var path = "BaseRoom";
+                    var pos = new Vector2Int(i, j);
+                    var roomEntity = await GF.Entity.ShowEntityAwait<RoomEntity>(path, Const.EntityGroup.Level,
+                        EntityParams.Create(new Vector3(16 * i, 10 * j, 0), Vector3.zero)) as RoomEntity;
+                    roomEntity.SetData(pos);
+                }
+            }
+        }
+
+        // 初始化游戏
+        var playerParams = EntityParams.Create(new Vector3(curPos.x * 16, curPos.y *10,0), Vector3.zero);
+        playerEntity = await GF.Entity.ShowEntityAwait<PlayerEntity>("player", Const.EntityGroup.Player, playerParams) as PlayerEntity;
+        //CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);
+        CameraController.Instance.mainCam.transform.position = new Vector3(curPos.x * 16, curPos.y * 10, -20);
+    }
+
+    Vector3 movePos_old;
+    Vector3 movePos_target;
+    Vector3 movePos_player;
+    float spendTime = 0.5f;
+    float curTime = 1;
+    bool updateCamera = false;
+    void SwitchRoom(object sender, GameEventArgs e)
+    {
+        var args = e as SwitchRoomEventArgs;
+        var curPos = GF.Floor.GetCurRoomPos();
+        var oldPos = args.oldPos;
+        var dir = args.dir;
+        movePos_old = new Vector3(oldPos.x * 16, oldPos.y * 10, -20);
+        movePos_target = new Vector3(curPos.x * 16, curPos.y * 10, -20);
+        curTime = 0;
+        updateCamera = true;
+        movePos_player = new Vector3(movePos_target.x - dir.x * 5, movePos_target.y - 3*dir.y, 0);
+
+    }
 
     protected override void OnUpdate(IFsm<IProcedureManager> procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+        if(updateCamera)
+        {
+            curTime += Time.deltaTime;
+            var delta = Mathf.Min(1,curTime / spendTime);
+            var pos = Vector3.Lerp(movePos_old, movePos_target, delta);
+            CameraController.Instance.mainCam.transform.position = pos;
+            if(delta == 1)
+            {
+                playerEntity.SetPosition(movePos_player);
+                updateCamera = false;
+            }
+        }
 
     }
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
@@ -42,9 +116,6 @@ public class GameProcedure : ProcedureBase
         {
             GF.Base.ResumeGame();
         }
-        GF.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
-        GF.Event.Unsubscribe(CloseUIFormCompleteEventArgs.EventId, OnCloseUIForm);
-        GF.Event.Unsubscribe(GameplayEventArgs.EventId, OnGameplayEvent);
         base.OnLeave(procedureOwner, isShutdown);
     }
 

@@ -72,6 +72,7 @@
     <None Include="Assets\AAAGame\DataTable\ColorTable.txt" />
     <None Include="Assets\AAAGame\DataTable\Core\EntityGroupTable.txt" />
     <None Include="Assets\AAAGame\Font\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\AAAGame\DataTable\LevelTable#A.txt" />
     <None Include="Assets\AAAGame\DataTable\Core\UITable.txt" />
     <None Include="Assets\AAAGame\DataTable\LevelTable.txt" />
     <None Include="Assets\AAAGame\Font\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -104,6 +105,7 @@
     <None Include="Assets\AAAGame\Font\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\AAAGame\Shader\TextureStepper.shader" />
     <None Include="Assets\AAAGame\Font\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\AAAGame\Config\GameConfig#A.txt" />
     <None Include="Assets\AAAGame\Font\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>

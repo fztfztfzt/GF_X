@@ -14,6 +14,24 @@ public class PlayerInputManager : MonoBehaviour
     private Vector2 moveDir;
     private Vector2 attackDir;
     private float lastAttackTime = 0.0f;
+
+    public void OnDisable()
+    {
+        rb.linearVelocity = Vector2.zero;
+        moveDir = Vector2.zero;
+        attackDir = Vector2.zero;
+        lastAttackTime = 0.0f;
+        playerSpriteSetter.FaceNormal();
+        playerSpriteSetter.BodyNormal();
+    }
+
+    public void OnEnable()
+    {
+        rb.linearVelocity = Vector2.zero;
+        moveDir = Vector2.zero;
+        attackDir = Vector2.zero;
+        lastAttackTime = 0.0f;
+    }
     private Vector2 SquareTocircle(Vector2 input)
     {
         Vector2 output = Vector2.zero;
@@ -23,6 +41,7 @@ public class PlayerInputManager : MonoBehaviour
     }
     public void OnMove(InputValue value)
     {
+        if(enabled == false) return;
         Vector2 input = value.Get<Vector2>();
         input = SquareTocircle(input);
         moveDir = input;
@@ -60,6 +79,7 @@ public class PlayerInputManager : MonoBehaviour
     }
     private void Update()
     {
+        if (enabled == false) return;
         GenBullet();
     }
     void GenBullet()
@@ -82,6 +102,7 @@ public class PlayerInputManager : MonoBehaviour
 
     public void OnAttack(InputValue value)
     {
+        if (enabled == false) return;
         Vector2 input = value.Get<Vector2>();
         attackDir = input;
         UpdateAction();

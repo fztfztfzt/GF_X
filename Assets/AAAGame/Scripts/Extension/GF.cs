@@ -12,12 +12,14 @@ public class GF : GFBuiltin
 
     public static StaticUIComponent StaticUI { get; private set; } //无需异步加载的, 通用UI
 
+    public static FloorComponent Floor { get; private set; } // 楼层管理
     private void Start()
     {
         DataModel = GameEntry.GetComponent<DataModelComponent>();
         //AD = GameEntry.GetComponent<ADComponent>();
         StaticUI = GameEntry.GetComponent<StaticUIComponent>();
         VariablePool = GameEntry.GetComponent<VariablePoolComponent>();
+        Floor = GameEntry.GetComponent<FloorComponent>();
     }
 
     private void OnApplicationQuit()

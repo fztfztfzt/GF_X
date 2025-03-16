@@ -19,8 +19,6 @@ public class MenuProcedure : ProcedureBase
         base.OnEnter(procedureOwner);
         procedure = procedureOwner;
         ShowLevel();//加载关卡
-        //var res = await GF.WebRequest.AddWebRequestAsync("https://blog.csdn.net/final5788");
-        //Log.Info(Utility.Converter.GetString(res.Bytes));
     }
 
     protected override void OnUpdate(IFsm<IProcedureManager> procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -62,7 +60,7 @@ public class MenuProcedure : ProcedureBase
         GF.Entity.HideAllLoadedEntities();
 
         //异步打开主菜单UI
-        menuUIFormId = GF.UI.OpenUIForm(UIViews.MenuUIForm);
+        //menuUIFormId = GF.UI.OpenUIForm(UIViews.MenuUIForm);
 
         //动态创建关卡
         var lvTb = GF.DataTable.GetDataTable<LevelTable>();

@@ -42,9 +42,9 @@ public class LevelEntity : EntityBase
         var combatUnitTb = GF.DataTable.GetDataTable<CombatUnitTable>();
         var playerRow = combatUnitTb.GetDataRow(0);
         var playerParams = EntityParams.Create(playerSpawnPoint.position, playerSpawnPoint.eulerAngles);
-        playerParams.Set(PlayerEntity.P_DataTableRow, playerRow);
-        playerParams.Set<VarInt32>(PlayerEntity.P_CombatFlag, (int)CombatUnitEntity.CombatFlag.Player);
-        playerParams.Set<VarAction>(PlayerEntity.P_OnBeKilled, (Action)OnPlayerBeKilled);
+        //playerParams.Set(PlayerEntity.P_DataTableRow, playerRow);
+        //playerParams.Set<VarInt32>(PlayerEntity.P_CombatFlag, (int)CombatUnitEntity.CombatFlag.Player);
+        //playerParams.Set<VarAction>(PlayerEntity.P_OnBeKilled, (Action)OnPlayerBeKilled);
         m_PlayerEntity = await GF.Entity.ShowEntityAwait<PlayerEntity>(playerRow.PrefabName, Const.EntityGroup.Player, playerParams) as PlayerEntity;
         CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);
         IsAllReady = true;
@@ -67,7 +67,7 @@ public class LevelEntity : EntityBase
 
     public void StartGame()
     {
-        m_PlayerEntity.Ctrlable = true;
+        //m_PlayerEntity.Ctrlable = true;
     }
     private void SpawnEnemiesUpdate()
     {

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: df3e142bc9e4b9e40accc2c115100e2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 51
   m_Sprite: {fileID: 21300000, guid: df3e142bc9e4b9e40accc2c115100e2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -226,17 +226,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head_NormalIndex: 0
   Head_RightIndex: 2
+  Head_BackIndex: 4
   Head_AnimCount: 2
   Body_Normal: {x: 6, y: 1}
   Body_Right: {x: 0, y: 3}
-  Walk: {x: 0, y: 0, z: 0}
-  Right: {x: 0, y: 0, z: 0}
   HeadSprite: {fileID: 784923148606488225}
   BodySprite: {fileID: 7634279034063558736}
   State: 0
   BodyState: 0
   cellSize: 0.0625
   HeadAnim: 0
+  TestMode: 0
 --- !u!114 &2702839907261436315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +251,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpriteSetter: {fileID: 2301245281284928933}
   rb: {fileID: 984669293356805145}
+  bulletPrefab: {fileID: 2543233017372413201, guid: 0ebbe72361b25f44983092043d0047cd, type: 3}
   speed: 10
+  HeadState: 0
+  attackCD: 0.5
 --- !u!114 &3917506589034955479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,4 +357,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
