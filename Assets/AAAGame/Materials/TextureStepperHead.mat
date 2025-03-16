@@ -110,6 +110,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FirstXLen: 2
     - _FlipX: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -124,7 +125,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StepInterval: 0.5
+    - _StepInterval: 0.2
     - _Surface: 0
     - _WorkflowMode: 1
     - _XCount: 1

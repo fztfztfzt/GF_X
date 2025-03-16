@@ -84,6 +84,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\MiniMapForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataNodeExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\RatingDialog.Variables.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\CombatUnitEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UITopbar.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\MenuUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Entity\BulletEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\WebRequestResult.cs" />
     <Compile Include="Assets\AAAGame\Scripts\HotfixEntry.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Demo\CombatUnitEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\GridEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\GameOverUIForm.cs" />

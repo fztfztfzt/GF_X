@@ -79,8 +79,8 @@ public class Spawnner : MonoBehaviour
         for (int i = m_SpawnCount - 1; i >= 0; i--)
         {
             var eParams = EntityParams.Create(GetSpawnPoint(i), entityEulerAngles);
-            eParams.Set(AIEnemyEntity.P_DataTableRow, m_CombatUnitRow);
-            eParams.Set<VarInt32>(AIEnemyEntity.P_CombatFlag, (int)m_UnitFlag);
+            //eParams.Set(AIEnemyEntity.P_DataTableRow, m_CombatUnitRow);
+            //eParams.Set<VarInt32>(AIEnemyEntity.P_CombatFlag, (int)m_UnitFlag);
             if (m_UnitFlag == CombatUnitEntity.CombatFlag.Enemy)
             {
                 eParams.Set<VarTransform>(AIEnemyEntity.P_Target, player.CachedTransform);

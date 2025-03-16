@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7797822562461666085}
   m_Layer: 0
   m_Name: waller
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 9017971293513729376}
   m_Layer: 0
   m_Name: BaseRoom
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1022,6 +1022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: right
       objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Size.y
+      value: 0.07561457
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09967196
+      objectReference: {fileID: 0}
     - target: {fileID: 7626034632468168336, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
       propertyPath: Dir.x
       value: 1
@@ -1115,6 +1123,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: down
       objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Size.y
+      value: 0.08270391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08903776
+      objectReference: {fileID: 0}
     - target: {fileID: 7626034632468168336, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
       propertyPath: Dir.y
       value: -1
@@ -1207,6 +1223,14 @@ PrefabInstance:
     - target: {fileID: 2947416918318646156, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
       propertyPath: m_Name
       value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Size.y
+      value: 0.07561444
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861801622178485207, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09967185
       objectReference: {fileID: 0}
     - target: {fileID: 7626034632468168336, guid: 4e4678e67fc1e8d4f9f5bfa8183fc779, type: 3}
       propertyPath: Dir.x

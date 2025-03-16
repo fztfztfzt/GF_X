@@ -252,7 +252,7 @@ MonoBehaviour:
   playerSpriteSetter: {fileID: 2301245281284928933}
   rb: {fileID: 984669293356805145}
   bulletPrefab: {fileID: 2543233017372413201, guid: 0ebbe72361b25f44983092043d0047cd, type: 3}
-  speed: 10
+  speed: 6
   HeadState: 0
   attackCD: 0.5
 --- !u!114 &3917506589034955479
@@ -319,7 +319,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0041166246, y: -0.029845543}
+  m_Offset: {x: 0.0013331138, y: -0.14675295}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -329,7 +329,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.29193896, y: 0.36398005}
+  m_Size: {x: 0.16835111, y: 0.13016522}
   m_EdgeRadius: 0
 --- !u!50 &984669293356805145
 Rigidbody2D:

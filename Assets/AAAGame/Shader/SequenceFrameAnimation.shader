@@ -19,6 +19,7 @@ Shader "Custom/SequenceFrameAnimation"
         Tags {"Queue"="Transparent" "RenderType"="Transparent" }
         LOD 200
         Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
         Pass
         {
             CGPROGRAM

@@ -42,7 +42,7 @@ namespace UnityGameFramework.Runtime
 
         private string m_ReadOnlyPath = null;
         private string m_ReadWritePath = null;
-        private Dictionary<string, UnityEngine.Object> m_CachedAssets = null;
+        private Dictionary<string, object> m_CachedAssets = null;
         private GameFrameworkLinkedList<LoadAssetInfo> m_LoadAssetInfos = null;
         private GameFrameworkLinkedList<LoadSceneInfo> m_LoadSceneInfos = null;
         private GameFrameworkLinkedList<UnloadSceneInfo> m_UnloadSceneInfos = null;
@@ -550,7 +550,7 @@ namespace UnityGameFramework.Runtime
         {
             m_ReadOnlyPath = null;
             m_ReadWritePath = null;
-            m_CachedAssets = new Dictionary<string, UnityEngine.Object>(StringComparer.Ordinal);
+            m_CachedAssets = new (StringComparer.Ordinal);
             m_LoadAssetInfos = new GameFrameworkLinkedList<LoadAssetInfo>();
             m_LoadSceneInfos = new GameFrameworkLinkedList<LoadSceneInfo>();
             m_UnloadSceneInfos = new GameFrameworkLinkedList<UnloadSceneInfo>();
@@ -585,11 +585,17 @@ namespace UnityGameFramework.Runtime
                     float elapseSeconds = (float)(DateTime.UtcNow - loadAssetInfo.StartTime).TotalSeconds;
                     if (elapseSeconds >= loadAssetInfo.DelaySeconds)
                     {
-                        UnityEngine.Object asset = GetCachedAsset(loadAssetInfo.AssetName);
+                        object asset = GetCachedAsset(loadAssetInfo.AssetName);
                         if (asset == null)
                         {
 #if UNITY_EDITOR
-                            if (loadAssetInfo.AssetType != null)
+                            if(loadAssetInfo.AssetType == typeof(MultipleSprite))
+                            {
+                                var ans = new MultipleSprite();
+                                ans.Init(UnityEditor.AssetDatabase.LoadAllAssetsAtPath(loadAssetInfo.AssetName));
+                                asset = ans;
+                            }    
+                            else if (loadAssetInfo.AssetType != null)
                             {
                                 asset = UnityEditor.AssetDatabase.LoadAssetAtPath(loadAssetInfo.AssetName, loadAssetInfo.AssetType);
                             }
@@ -1646,7 +1652,7 @@ namespace UnityGameFramework.Runtime
             return m_CachedAssets.ContainsKey(assetName);
         }
 
-        private UnityEngine.Object GetCachedAsset(string assetName)
+        private object GetCachedAsset(string assetName)
         {
             if (!m_EnableCachedAssets)
             {
@@ -1658,7 +1664,7 @@ namespace UnityGameFramework.Runtime
                 return null;
             }
 
-            UnityEngine.Object asset = null;
+            object asset = null;
             if (m_CachedAssets.TryGetValue(assetName, out asset))
             {
                 return asset;

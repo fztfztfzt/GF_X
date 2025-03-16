@@ -35,7 +35,7 @@ public class AIEnemyEntity : CombatUnitEntity
 #endif
         }
     }
-    protected override bool ApplyDamage(CombatUnitEntity attacker, int damgeValue)
+    public override bool ApplyDamage(CombatUnitEntity attacker, int damgeValue)
     {
         bool bekilled = base.ApplyDamage(attacker, damgeValue);
         if (Hp > 0)

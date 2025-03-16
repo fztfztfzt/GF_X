@@ -27,6 +27,7 @@ namespace UnityGameFramework.Runtime
         private string m_FileName = null;
         private string m_BytesFullPath = null;
         private string m_AssetName = null;
+        private Type m_assetType = null;
         private float m_LastProgress = 0f;
         private bool m_Disposed = false;
 #if UNITY_5_4_OR_NEWER
@@ -267,6 +268,7 @@ namespace UnityGameFramework.Runtime
             }
 
             m_AssetName = assetName;
+            m_assetType = assetType;
             if (isScene)
             {
                 int sceneNamePositionStart = assetName.LastIndexOf('/');
@@ -286,7 +288,14 @@ namespace UnityGameFramework.Runtime
             {
                 if (assetType != null)
                 {
-                    m_AssetBundleRequest = assetBundle.LoadAssetAsync(assetName, assetType);
+                    if(assetType == typeof(MultipleSprite))
+                    {
+                        m_AssetBundleRequest = assetBundle.LoadAllAssetsAsync<Sprite>();
+                    }
+                    else
+                    {
+                        m_AssetBundleRequest = assetBundle.LoadAssetAsync(assetName, assetType);
+                    }
                 }
                 else
                 {
@@ -535,7 +544,17 @@ namespace UnityGameFramework.Runtime
                 {
                     if (m_AssetBundleRequest.asset != null)
                     {
-                        LoadResourceAgentHelperLoadCompleteEventArgs loadResourceAgentHelperLoadCompleteEventArgs = LoadResourceAgentHelperLoadCompleteEventArgs.Create(m_AssetBundleRequest.asset);
+                        LoadResourceAgentHelperLoadCompleteEventArgs loadResourceAgentHelperLoadCompleteEventArgs;
+                        if (m_assetType == typeof(MultipleSprite))
+                        {
+                            var asset = new MultipleSprite();
+                            asset.Init(m_AssetBundleRequest.allAssets);
+                            loadResourceAgentHelperLoadCompleteEventArgs = LoadResourceAgentHelperLoadCompleteEventArgs.Create(asset);
+                        }
+                        else
+                        {
+                            loadResourceAgentHelperLoadCompleteEventArgs = LoadResourceAgentHelperLoadCompleteEventArgs.Create(m_AssetBundleRequest.asset);
+                        }
                         m_LoadResourceAgentHelperLoadCompleteEventHandler(this, loadResourceAgentHelperLoadCompleteEventArgs);
                         ReferencePool.Release(loadResourceAgentHelperLoadCompleteEventArgs);
                         m_AssetName = null;

@@ -2,10 +2,12 @@
 using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bullt : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
+    public GameObject Shadow;
     public Vector3 Speed;
     public float LifeTime = 2.0f;
     public float g = 9.8f;
@@ -13,8 +15,10 @@ public class Bullt : MonoBehaviour
     private float duration = 0.0f;
     private bool isDie = false;
     private bool isG = false;
-    private void Start()
+    Rigidbody2D rb;
+    private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         propertyBlock = new MaterialPropertyBlock();
         spriteRenderer.GetPropertyBlock(propertyBlock);
 
@@ -28,6 +32,7 @@ public class Bullt : MonoBehaviour
     }
     public void SetDirection(Vector2 dir)
     {
+        rb.linearVelocity = dir * Speed;
         Speed = Speed * dir;
         if(Speed.y == 0)
         {
@@ -44,18 +49,26 @@ public class Bullt : MonoBehaviour
         duration += Time.deltaTime;
         if (duration >= LifeTime)
         {
-            if(isDie) return;
-            isDie = true;
-            StartCoroutine(Die());
+            ToDie();
             return;
         }
 
-        transform.position += Speed * Time.deltaTime;
-        Speed.y -= g * Time.deltaTime;
+        //transform.position += Speed * Time.deltaTime;
+        //Speed.y -= g * Time.deltaTime;
+    }
+
+    void ToDie()
+    {
+        if (isDie) return;
+        StartCoroutine(Die());
     }
 
     private IEnumerator Die()
     {
+        isDie = true;
+        rb.simulated = false;
+        Shadow.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
         PlayDieAnima();
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
@@ -67,5 +80,14 @@ public class Bullt : MonoBehaviour
         propertyBlock.SetFloat("_TimeStart", Time.time);
         propertyBlock.SetInt("_Anim", 1);
         spriteRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            ToDie();
+        }
+        GF.LogInfo($"bullt OnTriggerEnter2D {collision.name}");
     }
 }

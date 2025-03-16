@@ -200,6 +200,7 @@
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\Variable\VarObject.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\Sound\PlaySoundFailureEventArgs.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\Download\UnityWebRequestDownloadAgentHelper.cs" />
+    <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\MultipleSprite.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\Entity\EntityLogic.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\Variable\VarColor.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\Scripts\Runtime\WebRequest\UnityWebRequestAgentHelper.cs" />
