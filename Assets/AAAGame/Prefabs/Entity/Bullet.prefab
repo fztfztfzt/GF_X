@@ -194,7 +194,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8504144019007651257}
   Shadow: {fileID: 1391437916494515679}
-  Speed: {x: 6, y: 6, z: 0}
+  Speed: {x: 8, y: 8, z: 0}
   LifeTime: 1
   g: 0.8
 --- !u!50 &7364303885699297658

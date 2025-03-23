@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531728077244739629}
   - component: {fileID: 7634279034063558736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8856239515073130948}
   - component: {fileID: 784923148606488225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,8 @@ GameObject:
   - component: {fileID: 3917506589034955479}
   - component: {fileID: 1319117236942959736}
   - component: {fileID: 984669293356805145}
-  m_Layer: 0
+  - component: {fileID: 6069095840601566995}
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,10 +252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpriteSetter: {fileID: 2301245281284928933}
   rb: {fileID: 984669293356805145}
-  bulletPrefab: {fileID: 2543233017372413201, guid: 0ebbe72361b25f44983092043d0047cd, type: 3}
-  speed: 6
+  speed: 4
   HeadState: 0
-  attackCD: 0.5
 --- !u!114 &3917506589034955479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,3 +357,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6069095840601566995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177015970655133841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b06d4508b13c34c89277d36701da14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCD: 0.5
+  bulletPrefab: {fileID: 2543233017372413201, guid: 0ebbe72361b25f44983092043d0047cd, type: 3}

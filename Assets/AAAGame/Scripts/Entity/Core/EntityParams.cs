@@ -22,6 +22,8 @@ public class EntityParams : RefParams
     /// </summary>
     public Transform ParentTransform { get; set; } = null;
 
+    public object param;
+
     /// <summary>
     /// 实体显示时回调
     /// </summary>

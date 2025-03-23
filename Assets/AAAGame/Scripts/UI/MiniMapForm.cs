@@ -44,15 +44,14 @@ public class MiniMapForm:UIFormBase
         var map = GF.Floor.Rooms;
         startPos = GF.Floor.GetCurRoomPos();
         var offset = new Vector2(GetComponent<RectTransform>().rect.width / 2, GetComponent<RectTransform>().rect.height / 2);
-        for (int i = 1; i <= FloorWidth; i++)
+        foreach (var info in map)
         {
-            for (int j = 1; j <= FloorHeight; j++)
+            var room = info.Value;
+            int i = room.x;
+            int j = room.y;
+            if (room != null && room.RoomType != RoomType.EMPTY && room.Pass)
             {
-                var room = map[i, j];
-                if (room != null && room.RoomType != RoomType.EMPTY && room.Pass)
-                {
-                    GenRoom(i, j);
-                }
+                GenRoom(i, j);
             }
         }
         var curRoom = rooms[GF.Floor.GetRoomId(startPos.x, startPos.y)];
@@ -62,7 +61,7 @@ public class MiniMapForm:UIFormBase
     void GenRoom(int i, int j,bool form = false)
     {
         var map = GF.Floor.Rooms;
-        var room = map[i, j];
+        map.TryGetValue(GF.Floor.GetRoomId(i, j),out var room);
         if(room == null || room.RoomType == RoomType.EMPTY || (form && room.Pass))
         {
             return;

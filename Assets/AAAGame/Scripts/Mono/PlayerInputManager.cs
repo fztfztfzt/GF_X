@@ -6,21 +6,19 @@ public class PlayerInputManager : MonoBehaviour
 {
     public PlayerSpriteSetter playerSpriteSetter;
     public Rigidbody2D rb;
-    public GameObject bulletPrefab;
     public float speed;
     public int HeadState = 0;
-    public float attackCD = 0.5f;
 
     private Vector2 moveDir;
     private Vector2 attackDir;
-    private float lastAttackTime = 0.0f;
+    public Vector2 AttackDir=> attackDir;
+    public Vector2 MoveDir=> moveDir;
 
     public void OnDisable()
     {
         rb.linearVelocity = Vector2.zero;
         moveDir = Vector2.zero;
         attackDir = Vector2.zero;
-        lastAttackTime = 0.0f;
         playerSpriteSetter.FaceNormal();
         playerSpriteSetter.BodyNormal();
     }
@@ -30,7 +28,6 @@ public class PlayerInputManager : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         moveDir = Vector2.zero;
         attackDir = Vector2.zero;
-        lastAttackTime = 0.0f;
     }
     private Vector2 SquareTocircle(Vector2 input)
     {
@@ -80,25 +77,8 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         if (enabled == false) return;
-        GenBullet();
     }
-    void GenBullet()
-    {
-        if (attackDir.x != 0 || attackDir.y != 0)
-        {
-            if (Time.time - lastAttackTime >= attackCD)
-            {
-                lastAttackTime = Time.time;
-                var dir = attackDir;
-                if (moveDir != Vector2.zero)
-                {
-                    dir += attackDir.x == 0 ? new Vector2(moveDir.x/10, 0) : new Vector2(0, moveDir.y / 10);
-                }
-                var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullt>().SetDirection((dir));
-            }
-        }
-    }
+
 
     public void OnAttack(InputValue value)
     {
@@ -106,7 +86,6 @@ public class PlayerInputManager : MonoBehaviour
         Vector2 input = value.Get<Vector2>();
         attackDir = input;
         UpdateAction();
-        GenBullet();
     }
 
     private void UpdateAttackAction(Vector2 input)

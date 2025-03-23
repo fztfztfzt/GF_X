@@ -4,7 +4,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bullt : MonoBehaviour
+public class Bullet : CombatUnitEntity
 {
     public SpriteRenderer spriteRenderer;
     public GameObject Shadow;
@@ -30,7 +30,7 @@ public class Bullt : MonoBehaviour
         output.y = input.y * Mathf.Sqrt(1 - (input.x * input.x) / 2.0f);
         return output;
     }
-    public void SetDirection(Vector2 dir)
+    public void Init(Vector2 dir)
     {
         rb.linearVelocity = dir * Speed;
         Speed = Speed * dir;
@@ -84,9 +84,13 @@ public class Bullt : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        var combatUnit = collision.GetComponent<CombatUnitEntity>();
+        if (combatUnit != null)
         {
-            ToDie();
+            if (this.Attack(combatUnit))
+            {
+                ToDie();
+            }
         }
         GF.LogInfo($"bullt OnTriggerEnter2D {collision.name}");
     }

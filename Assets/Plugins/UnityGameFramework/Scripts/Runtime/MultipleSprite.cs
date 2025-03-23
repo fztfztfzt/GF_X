@@ -6,10 +6,13 @@ public class MultipleSprite
     Dictionary<string, Sprite> sprites = new();
     public void Init(Object[] imgs)
     {
-        for (int i = 1; i < imgs.Length; i++)
+        for (int i = 0; i < imgs.Length; i++)
         {
             var sprite = imgs[i] as Sprite;
-            sprites.Add(sprite.name, sprite);
+            if(sprite)
+            {
+                sprites.Add(sprite.name, sprite);
+            }
         }
     }
 

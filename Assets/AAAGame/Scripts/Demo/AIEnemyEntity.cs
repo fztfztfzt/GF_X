@@ -35,17 +35,4 @@ public class AIEnemyEntity : CombatUnitEntity
 #endif
         }
     }
-    public override bool ApplyDamage(CombatUnitEntity attacker, int damgeValue)
-    {
-        bool bekilled = base.ApplyDamage(attacker, damgeValue);
-        if (Hp > 0)
-        {
-#if UNITY_6000_0_OR_NEWER
-            m_Rigidbody.linearVelocity = Vector3.Normalize(CachedTransform.position - attacker.CachedTransform.position) * 10f;
-#else
-            m_Rigidbody.velocity = Vector3.Normalize(CachedTransform.position - attacker.CachedTransform.position) * 10f;
-#endif
-        }
-        return bekilled;
-    }
 }

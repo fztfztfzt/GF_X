@@ -159,6 +159,7 @@ public class PreloadProcedure : ProcedureBase
         {
             GF.DataTable.LoadDataTable(item, appConfig.LoadFromBytes, this);
         }
+        await GridItemConfigs.GetInstanceSync();
     }
     private void CreateGFExtension()
     {

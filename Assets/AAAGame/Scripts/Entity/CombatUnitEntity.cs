@@ -24,11 +24,19 @@ public class CombatUnitEntity : EntityBase
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
-        gameObject.layer = LayerMask.NameToLayer(CampFlag == CombatFlag.Player ? "Player" : "Enemy");
     }
 
+    public virtual int ComputeDamage(CombatUnitEntity other)
+    {
+        return 1;//默认伤害值，半个心
+    }
 
-    public virtual bool ApplyDamage(CombatUnitEntity attacker, int damgeValue)
+    public virtual bool Attack(CombatUnitEntity dest)
+    {
+        dest.ApplyDamage(1);
+        return true;
+    }
+    public virtual bool ApplyDamage(int damgeValue)
     {
         if (Hp <= 0) return false;
         Hp -= damgeValue;

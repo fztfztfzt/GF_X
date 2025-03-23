@@ -20,6 +20,10 @@ public class PlayerSpriteSetter : MonoBehaviour
 
     public bool HeadAnim = false;
     public bool TestMode = false;
+    private void Awake()
+    {
+        GF.LogInfo("123");
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

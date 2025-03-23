@@ -50,19 +50,18 @@ public class GameProcedure : ProcedureBase
         var rooms = GF.Floor.Rooms;
         var FloorWidth = GF.Floor.FloorWidth;
         var FloorHeight = GF.Floor.FloorHeight;
-        for (int i = 1; i <= FloorWidth; i++)
+        foreach(var info in rooms)
         {
-            for (int j = 1; j <= FloorHeight; j++)
+            var room = info.Value;
+            if (room != null )
             {
-                var room = rooms[i, j];
-                if (room != null )
-                {
-                    var path = "BaseRoom";
-                    var pos = new Vector2Int(i, j);
-                    var roomEntity = await GF.Entity.ShowEntityAwait<RoomEntity>(path, Const.EntityGroup.Level,
-                        EntityParams.Create(new Vector3(16 * i, 10 * j, 0), Vector3.zero)) as RoomEntity;
-                    roomEntity.SetData(pos);
-                }
+                var path = "BaseRoom";
+                int i = room.x;
+                int j = room.y;
+                var pos = new Vector2Int(i, j);
+                var roomEntity = await GF.Entity.ShowEntityAwait<RoomEntity>(path, Const.EntityGroup.Level,
+                    EntityParams.Create(new Vector3(16 * i, 10 * j, 0), Vector3.zero)) as RoomEntity;
+                roomEntity.SetData(room,pos);
             }
         }
 

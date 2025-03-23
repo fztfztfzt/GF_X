@@ -122,6 +122,8 @@ MonoBehaviour:
   - {fileID: 1186821389, guid: 524d443f502346543812853da73459bb, type: 3}
   - {fileID: -1406939930, guid: 524d443f502346543812853da73459bb, type: 3}
   - {fileID: 731648527, guid: 524d443f502346543812853da73459bb, type: 3}
+  - {fileID: 417283807, guid: 524d443f502346543812853da73459bb, type: 3}
+  - {fileID: 1803462557, guid: 524d443f502346543812853da73459bb, type: 3}
   Cell: {fileID: 6466195431625352150, guid: 35d370f338639dd4ca1b5d76237aa6a8, type: 3}
   RoomSize: {x: 100, y: 100}
   CellParent: {fileID: 1982016193095722091}
