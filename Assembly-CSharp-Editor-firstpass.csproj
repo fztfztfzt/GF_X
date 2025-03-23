@@ -1436,6 +1436,10 @@
       <Project>{70A97B6C-4021-42F5-76F7-1E69C1CD3CAC}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
+    <ProjectReference Include="NavMeshPlusEditor.csproj">
+      <Project>{3B99B99B-C1EE-2C94-A900-52527A5E6CB4}</Project>
+      <Name>NavMeshPlusEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="DOTween.Extension.csproj">
       <Project>{7A6ED076-C2FA-AA02-3D1F-494050453F04}</Project>
       <Name>DOTween.Extension</Name>
@@ -1455,6 +1459,10 @@
     <ProjectReference Include="Hotfix.csproj">
       <Project>{97381EC9-BD77-31AB-4026-21EE0A9356CA}</Project>
       <Name>Hotfix</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlus.csproj">
+      <Project>{2633938A-BA31-F78E-07E7-D5F8C9E448A4}</Project>
+      <Name>NavMeshPlus</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{A9CCB622-9412-48F8-6564-897448C71005}</Project>

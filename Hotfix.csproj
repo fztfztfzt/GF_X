@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AAAGame\Scripts\Common\RefParams.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Components\NavigationComponent.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\EntityGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\EntityExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarAction.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\LevelTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameOverUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\ColorTable.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\MonsterEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\RatingDialog.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\AwaitParams.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CombatUnitTable.cs" />
@@ -1312,6 +1314,10 @@
     <ProjectReference Include="DOTween.Extension.csproj">
       <Project>{7A6ED076-C2FA-AA02-3D1F-494050453F04}</Project>
       <Name>DOTween.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlus.csproj">
+      <Project>{2633938A-BA31-F78E-07E7-D5F8C9E448A4}</Project>
+      <Name>NavMeshPlus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
