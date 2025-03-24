@@ -47,7 +47,14 @@ public class RoomLayoutAsset : ScriptableObject
     {
         if (x >= 0 && x < width && y >= 0 && y < height)
         {
-            layoutData[GetId(x, y)] = obj;
+            if (obj == null)
+            {
+                layoutData.Remove(GetId(x, y));
+            }
+            else
+            {
+                layoutData[GetId(x, y)] = obj;
+            }
         }
     }
 

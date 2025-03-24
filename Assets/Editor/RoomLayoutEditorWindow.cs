@@ -78,6 +78,13 @@ public class RoomLayoutEditorWindow : EditorWindow
         {
             // 对象选择区域
             GUILayout.Label("对象选择:", EditorStyles.boldLabel);
+            //GUILayout.BeginVertical();
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("擦除"))
+            {
+                selectedObject = null;
+            }
             // 类别选择
             foreach (var category in roomLayouts)
             {
@@ -86,6 +93,8 @@ public class RoomLayoutEditorWindow : EditorWindow
                     selectedCategory = category.Key;
                 }
             }
+            GUILayout.EndHorizontal();
+
             // 显示选定类别的对象
             if (selectedCategory != null && roomLayouts.TryGetValue(selectedCategory, out var objectsInCategory))
             {
@@ -104,7 +113,7 @@ public class RoomLayoutEditorWindow : EditorWindow
                     }
                 }
             }
-
+            //GUILayout.BeginVertical();
             // 房间布局显示区域
             GUILayout.Label("房间布局:", EditorStyles.boldLabel);
 
@@ -146,11 +155,8 @@ public class RoomLayoutEditorWindow : EditorWindow
                     }
                     if (GUILayout.Button(texture2D, GUILayout.Width(64), GUILayout.Height(32)))
                     {
-                        if (selectedObject != null)
-                        {
-                            currentLayout.SetObjectAtPosition(x, y, selectedObject);
-                            EditorUtility.SetDirty(currentLayout);
-                        }
+                        currentLayout.SetObjectAtPosition(x, y, selectedObject);
+                        EditorUtility.SetDirty(currentLayout);
                     }
                 }
                 GUILayout.EndHorizontal();
@@ -164,6 +170,7 @@ public class RoomLayoutEditorWindow : EditorWindow
                 EditorUtility.SetDirty(currentLayout);
                 AssetDatabase.SaveAssets();
             }
+            //GUILayout.EndVertical();
         }
     }
     // 辅助方法：创建一个纯色纹理

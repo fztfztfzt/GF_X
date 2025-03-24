@@ -31,19 +31,3 @@ MonoBehaviour:
     type: 1
     dataId: 2
     sprite: {fileID: 0}
-  - id: 204
-    type: 1
-    dataId: 2
-    sprite: {fileID: 0}
-  - id: 205
-    type: 1
-    dataId: 2
-    sprite: {fileID: 0}
-  - id: 304
-    type: 1
-    dataId: 2
-    sprite: {fileID: 0}
-  - id: 305
-    type: 1
-    dataId: 2
-    sprite: {fileID: 0}
