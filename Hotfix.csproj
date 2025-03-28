@@ -66,10 +66,12 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\EntityGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\EntityExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarAction.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\vector2.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\MenuUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DOTweenExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\LanguagesTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tbcombat_unit.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CameraViewTable.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameOverUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\ColorTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\MonsterEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tbreward.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\RatingDialog.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\AwaitParams.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CombatUnitTable.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\MiniMapForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataNodeExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\RatingDialog.Variables.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\vector3.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\CombatUnitEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UITopbar.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\MenuUIForm.Variables.cs" />
@@ -95,6 +99,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Procedures\GameOverProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIItemObject.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\UtilityEx.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\combat_unit.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\PlayerEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\LanguagesDialog.Variables.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\SwitchRoomEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SettingExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\LevelEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\vector4.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarFloat.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\PlayerDataModel.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\UIExtension.cs" />
@@ -132,6 +138,8 @@
     <Compile Include="Assets\AAAGame\Scripts\HotfixEntry.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\GridEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tables.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Common\DataManager.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\GameOverUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\ApplovinMaxSdkHelper.cs" />
@@ -159,6 +167,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\DownloadResult.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\Core\Const.Groups.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\MenuProcedure.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\reward.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardMonoBehaviour.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Mono\Door.cs" />
@@ -1275,6 +1284,10 @@
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Luban.Runtime">
+      <HintPath>Library\ScriptAssemblies\Luban.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.InputSystem">

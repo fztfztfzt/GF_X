@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "name": "玩家",
+    "prefab_name": "MyPlayer",
+    "attack_radius": 10,
+    "move_speed": 10,
+    "hp": 100,
+    "damage": 2,
+    "max_attack_count": 2
+  },
+  {
+    "id": 1,
+    "name": "怪物1",
+    "prefab_name": "Monster",
+    "attack_radius": 1.2,
+    "move_speed": 5,
+    "hp": 1,
+    "damage": 1,
+    "max_attack_count": 1
+  },
+  {
+    "id": 2,
+    "name": "怪物21",
+    "prefab_name": "EnemyLv2",
+    "attack_radius": 1.2,
+    "move_speed": 6,
+    "hp": 3,
+    "damage": 1,
+    "max_attack_count": 1
+  },
+  {
+    "id": 3,
+    "name": "怪物3",
+    "prefab_name": "EnemyLv3",
+    "attack_radius": 1.2,
+    "move_speed": 6,
+    "hp": 5,
+    "damage": 1,
+    "max_attack_count": 1
+  }
+]

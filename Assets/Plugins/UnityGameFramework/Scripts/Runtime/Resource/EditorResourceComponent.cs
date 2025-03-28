@@ -1377,7 +1377,7 @@ namespace UnityGameFramework.Runtime
         /// <returns>存储加载二进制资源的二进制流。</returns>
         public byte[] LoadBinaryFromFileSystem(string binaryAssetName)
         {
-            throw new NotSupportedException("LoadBinaryFromFileSystem");
+            return File.ReadAllBytes($"{Application.dataPath}/../{binaryAssetName}");
         }
 
         /// <summary>

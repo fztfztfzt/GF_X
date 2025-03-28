@@ -28,6 +28,15 @@ public class CombatUnitTable : DataRowBase
     }
 
         /// <summary>
+        /// Name
+        /// </summary>
+        public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 预制体资源
         /// </summary>
         public string PrefabName
@@ -92,7 +101,7 @@ public class CombatUnitTable : DataRowBase
             int index = 0;
             index++;
             m_Id = int.Parse(columnStrings[index++]);
-            index++;
+            Name = columnStrings[index++];
             PrefabName = columnStrings[index++];
             AttackRadius = float.Parse(columnStrings[index++]);
             MoveSpeed = float.Parse(columnStrings[index++]);
@@ -110,6 +119,7 @@ public class CombatUnitTable : DataRowBase
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
+                    Name = binaryReader.ReadString();
                     PrefabName = binaryReader.ReadString();
                     AttackRadius = binaryReader.ReadSingle();
                     MoveSpeed = binaryReader.ReadSingle();

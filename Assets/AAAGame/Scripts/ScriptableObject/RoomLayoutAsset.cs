@@ -10,6 +10,7 @@ public class RoomGridDef
     [SerializeField]public int type;
     [SerializeField]public int dataId;
     public Texture2D sprite;
+    public string name;
     public void Copy(RoomGridDef other,int id)
     {
         this.type = other.type;

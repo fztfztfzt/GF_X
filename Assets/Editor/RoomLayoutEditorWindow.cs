@@ -27,6 +27,11 @@ public class RoomLayoutEditorWindow : EditorWindow
         LoadObjectDefinitions();
     }
 
+    int GetId(int type, int id)
+    {
+        return type << 6 | id;
+    }
+
     void LoadObjectDefinitions()
     {
         GridItemConfigs.GetInstanceEditor();
@@ -48,8 +53,28 @@ public class RoomLayoutEditorWindow : EditorWindow
                 sprite = subTexture
             };
             curItems.Add(data);
-            roomDatas.Add(item.Key, data);
+            roomDatas.Add(GetId(1,item.Key), data);
         }
+        var curMonsters = new List<RoomGridDef>();
+        roomLayouts.Add("怪物", curMonsters);
+        var datas = cfg.Tables.Instance.TbcombatUnit.DataList;
+        foreach(var data in datas)
+        {
+            // 获取预制体的缩略图
+            var obj = AssetDatabase.LoadAssetAtPath<GameObject>(UtilityBuiltin.AssetsPath.GetEntityPath(data.PrefabName));
+            Texture2D subTexture = AssetPreview.GetAssetPreview(obj);
+
+            RoomGridDef moster = new()
+            {
+                dataId = data.Id,
+                type = 2,
+                sprite = subTexture,
+                name = data.Name
+            };
+            curMonsters.Add(moster);
+            roomDatas.Add(GetId(2, data.Id), moster);
+        }
+
 
     }
     string selectedCategory = "";
@@ -98,19 +123,40 @@ public class RoomLayoutEditorWindow : EditorWindow
             // 显示选定类别的对象
             if (selectedCategory != null && roomLayouts.TryGetValue(selectedCategory, out var objectsInCategory))
             {
+                // 每行显示10个对象
+                const int itemsPerRow = 10;
+                int currentItemCount = 0;
                 foreach (var obj in objectsInCategory)
                 {
+                    if (currentItemCount % itemsPerRow == 0)
+                    {
+                        // 每10个对象换行
+                        GUILayout.BeginHorizontal();
+                    }
                     GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
                     if (selectedObject == obj)
                     {
                         // 如果是选中的对象，设置背景为绿色
                         buttonStyle.normal.background = MakeTexture(100, 100, new Color(0.0f, 1.0f, 0.0f, 0.3f));
                     }
-
-                    if (GUILayout.Button(new GUIContent(obj.sprite), buttonStyle, GUILayout.Width(100), GUILayout.Height(100)))
+                    GUIContent content = new GUIContent();
+                    content.text = obj.name; // 文字内容
+                    content.image = obj.sprite; // 图片内容
+                    if (GUILayout.Button(content, buttonStyle, GUILayout.Width(100), GUILayout.Height(100)))
                     {
                         selectedObject = obj;
                     }
+                    currentItemCount++;
+                    if (currentItemCount % itemsPerRow == 0)
+                    {
+                        // 每10个对象结束当前行
+                        GUILayout.EndHorizontal();
+                    }
+                }
+                // 如果最后一行没有满10个对象，结束当前行
+                if (currentItemCount % itemsPerRow != 0)
+                {
+                    GUILayout.EndHorizontal();
                 }
             }
             //GUILayout.BeginVertical();
@@ -149,11 +195,16 @@ public class RoomLayoutEditorWindow : EditorWindow
                 {
                     Texture2D texture2D = null;
                     var ans = GetCellLabel(x, y);
+                    GUIContent content = new GUIContent();
+
                     if (ans != null)
                     {
-                        texture2D = roomDatas[ans.dataId].sprite;
+                        texture2D = roomDatas[GetId(ans.type,ans.dataId)].sprite;
+                        content.text = roomDatas[GetId(ans.type, ans.dataId)].name; // 文字内容
+                        content.image = texture2D; // 图片内容
                     }
-                    if (GUILayout.Button(texture2D, GUILayout.Width(64), GUILayout.Height(32)))
+
+                    if (GUILayout.Button(content, GUILayout.Width(64), GUILayout.Height(32)))
                     {
                         currentLayout.SetObjectAtPosition(x, y, selectedObject);
                         EditorUtility.SetDirty(currentLayout);
