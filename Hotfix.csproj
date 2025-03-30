@@ -74,6 +74,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tbcombat_unit.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\BombEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CameraViewTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\LevelTable.cs" />

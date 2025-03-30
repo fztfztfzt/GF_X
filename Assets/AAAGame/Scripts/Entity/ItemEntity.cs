@@ -26,12 +26,18 @@ public class ItemEntity : EntityBase
     {
         if (gridItemInfo.Effect1.Length>0)
         {
-            switch (gridItemInfo.Effect1.Length)
+            for (int i = 0; i < gridItemInfo.Effect1.Length; i++)
             {
-                case 1:
-                    if(GF.Floor.PlayerEntity.IsFullHp) return false;
-                    GF.Floor.PlayerEntity.ApplyHeal(gridItemInfo.Param1[0]);
-                    break;
+                switch (gridItemInfo.Effect1[0])
+                {
+                    case 1://hp
+                        if (GF.Floor.PlayerEntity.IsFullHp) return false;
+                        GF.Floor.PlayerEntity.ApplyHeal(gridItemInfo.Param1[0]);
+                        break;
+                    case 2://添加资源
+                        GF.Floor.PlayerEntity.AddResource(gridItemInfo.Param1[0], gridItemInfo.Param1[1]);
+                        break;
+                }
             }
         }
         return true;

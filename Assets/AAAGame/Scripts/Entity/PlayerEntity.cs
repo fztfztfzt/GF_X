@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityGameFramework.Runtime;
 
 public class PlayerEntity : CombatUnitEntity
@@ -13,6 +14,7 @@ public class PlayerEntity : CombatUnitEntity
     private float lastAttackTime = 0.0f;
     public float attackCD = 0.5f;
     public GameObject bulletPrefab;
+    Dictionary<int,int> Resources = new Dictionary<int,int>();
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Door")
@@ -26,6 +28,16 @@ public class PlayerEntity : CombatUnitEntity
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         GenBullet();
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            //Ê¹ÓÃÕ¨µ¯
+            if(GetReource(2) > 0)
+            {
+                AddResource(2, -1);
+                var pos = transform.position;
+                GF.Entity.ShowEntity<BombEntity>("Bomb", Const.EntityGroup.Level, EntityParams.Create(pos,Vector3.zero,Vector3.one*3));
+            }
+        }
     }
     void GenBullet()
     {
@@ -89,5 +101,28 @@ public class PlayerEntity : CombatUnitEntity
                 GF.Entity.HideEntity(item.Entity);
             }
         }
+    }
+
+    internal void AddResource(int v1, int v2)
+    {
+        if(Resources.ContainsKey(v1))
+        {
+            Resources[v1] += v2;
+        }
+        else
+        {
+            Resources.Add(v1, v2);
+        }
+        GF.Event.Fire(PlayerDataChangedEventArgs.EventId, PlayerDataChangedEventArgs.Create((PlayerDataType)v1, 0, Resources[v1]));
+        GF.LogInfo($"AddResource {v1} {v2} {Resources[v1]}");
+    }
+
+    public int GetReource(int v1)
+    {
+        if (Resources.ContainsKey(v1))
+        {
+            return Resources[v1];
+        }
+        return 0;
     }
 }

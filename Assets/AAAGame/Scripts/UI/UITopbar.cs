@@ -21,8 +21,8 @@ public partial class UITopbar : UIFormBase
 
         var playerDm = GF.DataModel.GetOrCreate<PlayerDataModel>();
         varTxtCoin.text = playerDm.Coins.ToString();
-        varTxtEnergy.text = playerDm.GetData(PlayerDataType.Energy).ToString();
-        varTxtGem.text = playerDm.GetData(PlayerDataType.Diamond).ToString();
+        //varTxtEnergy.text = playerDm.GetData(PlayerDataType.Energy).ToString();
+        //varTxtGem.text = playerDm.GetData(PlayerDataType.Diamond).ToString();
     }
     protected override void OnClose(bool isShutdown, object userData)
     {
@@ -32,18 +32,18 @@ public partial class UITopbar : UIFormBase
     private void OnPlayerDataChanged(object sender, GameEventArgs e)
     {
         var args = e as PlayerDataChangedEventArgs;
-        switch (args.DataType)
-        {
-            case PlayerDataType.Coins:
-                varTxtCoin.text = args.Value.ToString();
-                break;
-            case PlayerDataType.Diamond:
-                varTxtGem.text = args.Value.ToString();
-                break;
-            case PlayerDataType.Energy:
-                varTxtEnergy.text = args.Value.ToString();
-                break;
-        }
+        //switch (args.DataType)
+        //{
+        //    case PlayerDataType.Coins:
+        //        varTxtCoin.text = args.Value.ToString();
+        //        break;
+        //    case PlayerDataType.Diamond:
+        //        varTxtGem.text = args.Value.ToString();
+        //        break;
+        //    case PlayerDataType.Energy:
+        //        varTxtEnergy.text = args.Value.ToString();
+        //        break;
+        //}
     }
 
     protected override void OnButtonClick(object sender, Button btSelf)

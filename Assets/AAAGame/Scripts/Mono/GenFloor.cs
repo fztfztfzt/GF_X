@@ -130,7 +130,7 @@ public class GenFloor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.qKey.wasPressedThisFrame)
+        if(Keyboard.current.rKey.wasPressedThisFrame)
         {
             ClearShowFloor();
             RefreshFloor();

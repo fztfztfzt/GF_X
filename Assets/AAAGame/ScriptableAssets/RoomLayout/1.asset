@@ -40,7 +40,22 @@ MonoBehaviour:
     dataId: 2
     sprite: {fileID: 0}
     name: 
-  - id: 304
+  - id: 409
+    type: 3
+    dataId: 3
+    sprite: {fileID: 0}
+    name: 
+  - id: 400
+    type: 3
+    dataId: 2
+    sprite: {fileID: 0}
+    name: 
+  - id: 5
+    type: 3
+    dataId: 4
+    sprite: {fileID: 0}
+    name: 
+  - id: 109
     type: 3
     dataId: 1
     sprite: {fileID: 0}

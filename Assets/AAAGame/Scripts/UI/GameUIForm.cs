@@ -24,13 +24,13 @@ public partial class GameUIForm : UIFormBase
         switch (args.DataType)
         {
             case PlayerDataType.Coins:
-                varGoldNum.text = args.Value.ToString();
+                varGoldNum.text = args.Value.ToString("D2");
                 break;
-            case PlayerDataType.Diamond:
-                varBombNum.text = args.Value.ToString();
+            case PlayerDataType.Bomb:
+                varBombNum.text = args.Value.ToString("D2");
                 break;
-            case PlayerDataType.Energy:
-                varKeyNum.text = args.Value.ToString();
+            case PlayerDataType.Key:
+                varKeyNum.text = args.Value.ToString("D2");
                 break;
             case PlayerDataType.Hp:
                 RefreshHp();
@@ -40,9 +40,9 @@ public partial class GameUIForm : UIFormBase
 
     private void RefreshCoinsText()
     {
-        varGoldNum.text = "00";
-        varBombNum.text = "00";
-        varKeyNum.text = "00";
+        varGoldNum.text = GF.Floor.PlayerEntity.GetReource(1).ToString("D2");
+        varBombNum.text = GF.Floor.PlayerEntity.GetReource(2).ToString("D2");
+        varKeyNum.text = GF.Floor.PlayerEntity.GetReource(3).ToString("D2");
         RefreshHp();
 
     }

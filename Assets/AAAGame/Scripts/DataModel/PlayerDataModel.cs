@@ -9,21 +9,21 @@ using UnityGameFramework.Runtime;
 public enum PlayerDataType
 {
     /// <summary>
-    /// 玩家金币
-    /// </summary>
-    Coins,
-    /// <summary>
-    /// 玩家钻石
-    /// </summary>
-    Diamond,
-    /// <summary>
     /// 玩家血量
     /// </summary>
     Hp,
     /// <summary>
+    /// 玩家金币
+    /// </summary>
+    Coins = 1,
+    /// <summary>
+    /// 玩家钻石
+    /// </summary>
+    Bomb = 2,
+    /// <summary>
     /// 玩家能量
     /// </summary>
-    Energy,
+    Key = 3,
     /// <summary>
     /// 关卡Id
     /// </summary>
@@ -67,11 +67,11 @@ public class PlayerDataModel : DataModelStorageBase
 
     protected override void OnInitialDataModel()
     {
-        m_PlayerDataDic[PlayerDataType.Coins] = GF.Config.GetInt("DefaultCoins");
-        m_PlayerDataDic[PlayerDataType.Diamond] = GF.Config.GetInt("DefaultDiamonds");
-        m_PlayerDataDic[PlayerDataType.Hp] = 100;
-        m_PlayerDataDic[PlayerDataType.Energy] = 100;
-        m_PlayerDataDic[PlayerDataType.LevelId] = 1;
+        //m_PlayerDataDic[PlayerDataType.Coins] = GF.Config.GetInt("DefaultCoins");
+        //m_PlayerDataDic[PlayerDataType.Diamond] = GF.Config.GetInt("DefaultDiamonds");
+        //m_PlayerDataDic[PlayerDataType.Hp] = 100;
+        //m_PlayerDataDic[PlayerDataType.Energy] = 100;
+        //m_PlayerDataDic[PlayerDataType.LevelId] = 1;
 
     }
     
