@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "name": "心",
+    "desc": "",
+    "multiple_sprite": "Items/pickup_001_heart.png",
+    "image": "pickup_001_heart_0",
+    "animator": "",
+    "tags": [
+      "item"
+    ],
+    "effect1": [
+      1
+    ],
+    "param1": [
+      2
+    ]
+  },
+  {
+    "id": 2,
+    "name": "硬币",
+    "desc": "",
+    "multiple_sprite": "Items/pickup_002_coin.png",
+    "image": "pickup_002_coin_0",
+    "animator": "Coin",
+    "tags": [
+      "item"
+    ],
+    "effect1": [],
+    "param1": []
+  },
+  {
+    "id": 3,
+    "name": "炸弹",
+    "desc": "",
+    "multiple_sprite": "Items/pickup_016_bomb.png",
+    "image": "pickup_016_bomb_0",
+    "animator": "",
+    "tags": [
+      "item"
+    ],
+    "effect1": [],
+    "param1": []
+  },
+  {
+    "id": 4,
+    "name": "钥匙",
+    "desc": "",
+    "multiple_sprite": "Items/pickup_003_key.png",
+    "image": "pickup_003_key_0",
+    "animator": "",
+    "tags": [
+      "item"
+    ],
+    "effect1": [],
+    "param1": []
+  },
+  {
+    "id": 5,
+    "name": "箱子",
+    "desc": "",
+    "multiple_sprite": "Items/pickup_005_chests.png",
+    "image": "pickup_005_chests_4",
+    "animator": "",
+    "tags": [
+      "item"
+    ],
+    "effect1": [],
+    "param1": []
+  }
+]
