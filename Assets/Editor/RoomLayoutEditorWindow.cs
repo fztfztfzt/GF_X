@@ -1,4 +1,5 @@
 ﻿// RoomLayoutEditorWindow.cs
+using Codice.CM.Triggers;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -74,7 +75,27 @@ public class RoomLayoutEditorWindow : EditorWindow
             curMonsters.Add(moster);
             roomDatas.Add(GetId(2, data.Id), moster);
         }
-
+        var drops = new List<RoomGridDef>();
+        roomLayouts.Add("掉落物", drops);
+        var items = cfg.Tables.Instance.Tbitem.DataList;
+        foreach (var data in items)
+        {
+            MultipleSpriteManager.Instance.LoadMultipleSprite(UtilityBuiltin.AssetsPath.GetSpritesPath(data.MultipleSprite));
+            var sprite = MultipleSpriteManager.Instance.GetSprite(data.Image);
+            var spriteRect = sprite.rect;
+            Texture2D subTexture = new Texture2D((int)spriteRect.width, (int)spriteRect.height);
+            subTexture.SetPixels(sprite.texture.GetPixels((int)spriteRect.x, (int)spriteRect.y, (int)spriteRect.width, (int)spriteRect.height));
+            subTexture.Apply();
+            RoomGridDef itemData = new()
+            {
+                dataId = data.Id,
+                type = 3,
+                sprite = subTexture,
+                name = data.Name
+            };
+            drops.Add(itemData);
+            roomDatas.Add(GetId(3, data.Id), itemData);
+        }
 
     }
     string selectedCategory = "";

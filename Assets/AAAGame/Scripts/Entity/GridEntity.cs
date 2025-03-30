@@ -22,6 +22,7 @@ public class GridEntity: CombatUnitEntity
 
     public override bool ApplyDamage(int damgeValue)
     {
+        damgeValue = 1;
         var ans = base.ApplyDamage(damgeValue);
         UpdateShow();
         return ans;

@@ -1,31 +1,88 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GameFramework.Event;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using GameFramework;
-using GameFramework.Event;
-using UnityEngine.EventSystems;
-using DG.Tweening;
-using System;
 using UnityGameFramework.Runtime;
-using TMPro;
-using UnityEngine.U2D;
 
 public partial class GameUIForm : UIFormBase
 {
+    public Image HeartTemplate;
+    public Sprite FullSprite;
+    public Sprite HalfSprite;
+    public Sprite EmptySprite;
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
         RefreshCoinsText();
+        GF.Event.Subscribe(PlayerDataChangedEventArgs.EventId, OnDataChange);
 
-        var uiparms = UIParams.Create();
-        uiparms.Set<VarBoolean>(UITopbar.P_EnableBG, false);
-        uiparms.Set<VarBoolean>(UITopbar.P_EnableSettingBtn, true);
-        this.OpenSubUIForm(UIViews.Topbar, 1, uiparms);
     }
+
+    private void OnDataChange(object sender, GameEventArgs e)
+    {
+        var args = e as PlayerDataChangedEventArgs;
+        switch (args.DataType)
+        {
+            case PlayerDataType.Coins:
+                varGoldNum.text = args.Value.ToString();
+                break;
+            case PlayerDataType.Diamond:
+                varBombNum.text = args.Value.ToString();
+                break;
+            case PlayerDataType.Energy:
+                varKeyNum.text = args.Value.ToString();
+                break;
+            case PlayerDataType.Hp:
+                RefreshHp();
+                break;
+        }
+    }
+
     private void RefreshCoinsText()
     {
-        var playerDm = GF.DataModel.GetOrCreate<PlayerDataModel>();
-        coinNumText.text = playerDm.Coins.ToString();
+        varGoldNum.text = "00";
+        varBombNum.text = "00";
+        varKeyNum.text = "00";
+        RefreshHp();
+
+    }
+
+    private void RefreshHp()
+    {
+        var playerEntity = GF.Floor.PlayerEntity;
+        var maxHp = playerEntity.MaxHp/2;
+        var hp = playerEntity.Hp;
+        int fullHeart = hp / 2;
+        int halfHeart = hp % 2;
+        int count = maxHp;
+        for (int i = varHeart.childCount; i < count; ++i)
+        {
+            Instantiate(HeartTemplate, varHeart);
+        }
+
+        for (int i = count; i < varHeart.childCount; ++i)
+        {
+            var obj = varHeart.GetChild(i);
+            obj.GetComponent<Image>().enabled = false;
+        }
+        for (int i = 0; i < count; ++i)
+        {
+            var obj = varHeart.GetChild(i);
+            var image = obj.GetComponent<Image>();
+            image.enabled = true;
+            if (i < fullHeart)
+            {
+                image.sprite = FullSprite;
+            }
+            else if (i < fullHeart + halfHeart)
+            {
+                image.sprite = HalfSprite;
+            }
+            else
+            {
+                image.sprite = EmptySprite;
+            }
+
+        }
     }
 }

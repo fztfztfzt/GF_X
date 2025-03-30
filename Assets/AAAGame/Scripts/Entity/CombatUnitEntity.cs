@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using cfg;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 
 /// <summary>
@@ -12,18 +13,30 @@ public class CombatUnitEntity : EntityBase
         Enemy
     }
 
+    public const string P_CombatFlag = "P_CombatFlag";
+    public const string P_DataTableRow = "DataTableRow";
 
     /// <summary>
     /// 阵营
     /// </summary>
     protected CombatFlag CampFlag { get; private set; }
-    public CombatUnitTable CombatUnitRow { get; private set; }
+    public combat_unit CombatUnitRow { get; private set; }
+    public int MaxHp;
 
+    public bool IsFullHp => Hp == MaxHp;
     public virtual int Hp { get; protected set; }
 
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
+        CampFlag = (CombatFlag)Params.Get<VarInt32>(P_CombatFlag).Value;
+        gameObject.layer = LayerMask.NameToLayer(CampFlag == CombatFlag.Player ? "Player" : "Enemy");
+        CombatUnitRow = Params.Get(P_DataTableRow) as combat_unit;
+        if (CombatUnitRow != null)
+        {
+            Hp = CombatUnitRow.Hp;
+        }
+        MaxHp = Hp;
     }
 
     public virtual int ComputeDamage(CombatUnitEntity other)
@@ -33,7 +46,23 @@ public class CombatUnitEntity : EntityBase
 
     public virtual bool Attack(CombatUnitEntity dest)
     {
-        dest.ApplyDamage(1);
+        int damage = 1;
+        if (dest.CampFlag == CombatFlag.Player)
+        {
+            if (GF.Floor.FloorLevel == 1)
+            {
+                damage = 1;
+            }
+            else
+            {
+                damage = 2;
+            }
+        }
+        else
+        {
+            damage = (int)(3.5 * Mathf.Sqrt(1.2f*1 + 1));
+        }
+        dest.ApplyDamage(damage);
         return true;
     }
     public virtual bool ApplyDamage(int damgeValue)
@@ -47,7 +76,14 @@ public class CombatUnitEntity : EntityBase
         }
         return false;
     }
-
+    public virtual void ApplyHeal(int healValue)
+    {
+        Hp += healValue;
+        if (Hp > MaxHp)
+        {
+            Hp = MaxHp;
+        }
+    }
     protected virtual void OnBeKilled()
     {
         GF.Entity.HideEntity(this.Entity);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MultipleSprite
 {
-    Dictionary<string, Sprite> sprites = new();
+    public Dictionary<string, Sprite> Sprites = new();
     public void Init(Object[] imgs)
     {
         for (int i = 0; i < imgs.Length; i++)
@@ -11,16 +11,16 @@ public class MultipleSprite
             var sprite = imgs[i] as Sprite;
             if(sprite)
             {
-                sprites.Add(sprite.name, sprite);
+                Sprites.Add(sprite.name, sprite);
             }
         }
     }
 
     public Sprite GetSprite(string name)
     {
-        if (sprites.ContainsKey(name))
+        if (Sprites.ContainsKey(name))
         {
-            return sprites[name];
+            return Sprites[name];
         }
         return null;
     }

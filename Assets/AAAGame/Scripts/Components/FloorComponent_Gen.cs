@@ -17,6 +17,8 @@ public partial class FloorComponent : GameFrameworkComponent
     int roomNumber = 0;
     int MinDeadEnds = 3;
 
+    public PlayerEntity PlayerEntity { get; internal set; }
+
     public void GenFloor()
     {
         map = new RoomType[FloorWidth + 1, FloorHeight + 1];
@@ -188,6 +190,22 @@ public partial class FloorComponent : GameFrameworkComponent
                     gridItem.dataId = item.dataId;
                     gridItem.id = id;
                     roomData.Grids.Add(id++,gridItem);
+                    break;
+                case 2:
+                    var monsterItem = new MonsterGridData();
+                    monsterItem.y = pos.y;
+                    monsterItem.x = pos.x;
+                    monsterItem.dataId = item.dataId;
+                    monsterItem.id = id;
+                    roomData.Grids.Add(id++, monsterItem);
+                    break;
+                case 3:
+                    var itemGrid = new ItemGridData();
+                    itemGrid.y = pos.y;
+                    itemGrid.x = pos.x;
+                    itemGrid.dataId = item.dataId;
+                    itemGrid.id = id;
+                    roomData.Grids.Add(id++, itemGrid);
                     break;
             }
         }

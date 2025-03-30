@@ -35,48 +35,13 @@ MonoBehaviour:
     dataId: 2
     sprite: {fileID: 0}
     name: 
-  - id: 204
-    type: 2
-    dataId: 1
-    sprite: {fileID: 0}
-    name: 
-  - id: 205
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 305
+  - id: 201
     type: 2
     dataId: 2
     sprite: {fileID: 0}
     name: 
   - id: 304
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 303
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 203
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 103
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 104
-    type: 2
-    dataId: 2
-    sprite: {fileID: 0}
-    name: 
-  - id: 105
-    type: 2
-    dataId: 3
+    type: 3
+    dataId: 1
     sprite: {fileID: 0}
     name: 

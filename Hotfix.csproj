@@ -70,6 +70,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\MenuUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DOTweenExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\LanguagesTable.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\item.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tbcombat_unit.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarVector3Array.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ShopUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\RoomEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\ItemEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\StaticUIComponent.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Mono\Bullet.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\GFEventArgs.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Common\DataManager.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\GameOverUIForm.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Gen\DataTable\Tbitem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\ApplovinMaxSdkHelper.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelStorageBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Components\FloorComponent.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\SoundGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\UITopbar.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\CameraController.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Common\MultipleSpriteManager.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\JobsPhysics.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\SampleEntity.cs" />
   </ItemGroup>

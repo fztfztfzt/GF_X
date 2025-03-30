@@ -198,5 +198,15 @@ namespace UnityGameFramework.Runtime
         {
             gameObject.SetActive(visible);
         }
+
+        public virtual void Enter()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public virtual void Leave()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Codice.Client.Common;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityGameFramework.Runtime;
@@ -6,28 +10,34 @@ using UnityGameFramework.Runtime;
 public class RoomEntity : EntityBase
 {
     public Door[] doors;
-    protected override void OnShow(object userData)
+    private List<int> gridEntityIds;
+    RoomData roomData;
+    internal async UniTask SetData(RoomData room,Vector2Int curPos)
     {
-        base.OnShow(userData);
-        var eParams = EntityParams.Create(transform.position, Vector3.zero);
-        eParams.Set<VarInt32>(GridEntity.P_GridID, 1);
+        roomData = room;
+        SerDoor(curPos + Vector2Int.up, 0);
+        SerDoor(curPos + Vector2Int.down, 1);
+        SerDoor(curPos + Vector2Int.left, 2);
+        SerDoor(curPos + Vector2Int.right, 3);
+        await CreateEntities();
     }
 
-    internal void SetData(RoomData room,Vector2Int curPos)
+    private async UniTask CreateEntities()
     {
-        SerDoor(curPos + Vector2Int.up,0);
-        SerDoor(curPos + Vector2Int.down,1);
-        SerDoor(curPos + Vector2Int.left,2);
-        SerDoor(curPos + Vector2Int.right,3);
-        var curRoomType = GF.Floor.GetRoomType(curPos);
-        var offset = new Vector3(43.5f - 48f, 62.4f - 60f,0);
-        foreach(var info in room.Grids)
+        if(gridEntityIds == null)
+        {
+            gridEntityIds = new List<int>(10);
+        }
+        else
+        {
+            return;
+        }
+        var offset = new Vector3(43.5f - 48f, 62.4f - 60f, 0);
+        foreach (var info in roomData.Grids)
         {
             var item = info.Value;
-            var pos = new Vector3(item.x, -item.y, 0);
-            var eParams = EntityParams.Create(transform.position + offset + pos, Vector3.zero);
-            eParams.param = item;
-            int entityId = GF.Entity.ShowEntity<GridEntity>("grid", Const.EntityGroup.Level, eParams);
+            var entity = await item.OnEnter(transform.position + offset);
+            gridEntityIds.Add(entity.Entity.Id);
         }
     }
 
@@ -36,14 +46,30 @@ public class RoomEntity : EntityBase
         var show = GF.Floor.GetRoomShowType(curPos);
         doors[index].Show(show != RoomType.EMPTY);
     }
-    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+
+    public override void Leave()
     {
-        base.OnUpdate(elapseSeconds, realElapseSeconds);
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        foreach (var id in gridEntityIds)
         {
-            var eParams = EntityParams.Create(transform.position, Vector3.zero);
-            eParams.Set<VarInt32>(GridEntity.P_GridID, 1);
-            int entityId = GF.Entity.ShowEntity<GridEntity>("grid", Const.EntityGroup.Level, eParams);
+            var entity = GF.Entity.GetEntity<EntityLogic>(id);
+            if (entity != null)
+            {
+                entity.Leave();
+            }
         }
     }
+
+    public override void Enter()
+    {
+        foreach (var id in gridEntityIds)
+        {
+            var entity = GF.Entity.GetEntity<EntityLogic>(id);
+            if (entity != null)
+            {
+                entity.Enter();
+            }
+        }
+    }
+
 }
+

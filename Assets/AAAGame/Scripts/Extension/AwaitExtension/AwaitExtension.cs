@@ -324,7 +324,6 @@ public static class AwaitExtension
     /// 加载资源（可等待）
     /// </summary>
     public static UniTask<T> LoadAssetAwait<T>(this ResourceComponent resourceComponent, string assetName)
-        where T : UnityEngine.Object
     {
 #if UNITY_EDITOR
         TipsSubscribeEvent();
@@ -335,7 +334,7 @@ public static class AwaitExtension
             {
                 var source = loadAssetTcs;
                 loadAssetTcs = null;
-                T tAsset = asset as T;
+                T tAsset = (T)asset;
                 if (tAsset != null)
                 {
                     source.TrySetResult(tAsset);

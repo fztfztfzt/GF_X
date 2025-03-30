@@ -34,7 +34,7 @@ public class RefParams : IReference
     }
     public object Get(string key)
     {
-        return Get<VarObject>(key).Value;
+        return Get<VarObject>(key)?.Value;
     }
     /// <summary>
     /// 获取引用类型的参数

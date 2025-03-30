@@ -4,6 +4,10 @@ using UnityGameFramework.Runtime;
 using GameFramework.Event;
 using UnityEngine;
 using System;
+using static CombatUnitEntity;
+using System.Collections.Generic;
+using cfg;
+using Cysharp.Threading.Tasks;
 
 
 public class GameProcedure : ProcedureBase
@@ -12,6 +16,7 @@ public class GameProcedure : ProcedureBase
     private LevelEntity m_Level;
     private IFsm<IProcedureManager> procedure;
     PlayerEntity playerEntity;
+    Dictionary<int, RoomEntity> roomEntities = new Dictionary<int, RoomEntity>(10);
 
     protected override async void OnEnter(IFsm<IProcedureManager> procedureOwner)
     {
@@ -36,13 +41,14 @@ public class GameProcedure : ProcedureBase
     {
 
         GF.Floor.GenFloor();
-        ShowRooms();
+        await ShowRooms();
         var miniMap = await GF.UI.OpenUIFormAwait(UIViews.MiniMap) as MiniMapForm;
         miniMap.RefreshAll();
+        GF.UI.OpenUIForm(UIViews.GameUIForm);
         GF.BuiltinView.HideLoadingProgress();
     }
 
-    private async void ShowRooms()
+    private async UniTask ShowRooms()
     {
         var curPos = GF.Floor.GetCurRoomPos();
         var roomType = GF.Floor.GetRoomType(curPos);
@@ -61,13 +67,23 @@ public class GameProcedure : ProcedureBase
                 var pos = new Vector2Int(i, j);
                 var roomEntity = await GF.Entity.ShowEntityAwait<RoomEntity>(path, Const.EntityGroup.Level,
                     EntityParams.Create(new Vector3(16 * i, 10 * j, 0), Vector3.zero)) as RoomEntity;
-                roomEntity.SetData(room,pos);
+                await roomEntity.SetData(room,pos);
+                roomEntity.Leave();
+                roomEntities.Add(GF.Floor.GetRoomId(i, j), roomEntity);
             }
         }
 
         // 初始化游戏
         var playerParams = EntityParams.Create(new Vector3(curPos.x * 16, curPos.y *10,0), Vector3.zero);
+        playerParams.Set<VarInt32>(P_CombatFlag, (int)CombatFlag.Player);
+        playerParams.Set(P_DataTableRow, Tables.Instance.TbcombatUnit.Get(1));
         playerEntity = await GF.Entity.ShowEntityAwait<PlayerEntity>("player", Const.EntityGroup.Player, playerParams) as PlayerEntity;
+        GF.Floor.PlayerEntity = playerEntity;
+        var curRoom = roomEntities[GF.Floor.GetRoomId(curPos.x, curPos.y)];
+        if (curRoom != null)
+        {
+            curRoom.Enter();
+        }
         //CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);
         CameraController.Instance.mainCam.transform.position = new Vector3(curPos.x * 16, curPos.y * 10, -20);
     }
@@ -83,13 +99,17 @@ public class GameProcedure : ProcedureBase
         var args = e as SwitchRoomEventArgs;
         var curPos = GF.Floor.GetCurRoomPos();
         var oldPos = args.oldPos;
+        var oldRoom = roomEntities[GF.Floor.GetRoomId(oldPos.x, oldPos.y)];
+        if(oldRoom != null)
+        {
+            oldRoom.Leave();
+        }
         var dir = args.dir;
         movePos_old = new Vector3(oldPos.x * 16, oldPos.y * 10, -20);
         movePos_target = new Vector3(curPos.x * 16, curPos.y * 10, -20);
         curTime = 0;
         updateCamera = true;
         movePos_player = new Vector3(movePos_target.x - dir.x * 5, movePos_target.y - 3*dir.y, 0);
-
     }
 
     protected override void OnUpdate(IFsm<IProcedureManager> procedureOwner, float elapseSeconds, float realElapseSeconds)
@@ -103,8 +123,14 @@ public class GameProcedure : ProcedureBase
             CameraController.Instance.mainCam.transform.position = pos;
             if(delta == 1)
             {
-                playerEntity.SetPosition(movePos_player);
+                playerEntity.SetPosition (movePos_player);
                 updateCamera = false;
+                var curPos = GF.Floor.GetCurRoomPos();
+                var curRoom = roomEntities[GF.Floor.GetRoomId(curPos.x, curPos.y)];
+                if (curRoom != null)
+                {
+                    curRoom.Enter();
+                }
             }
         }
 

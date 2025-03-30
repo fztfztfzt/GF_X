@@ -7,16 +7,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-public class PlayerEntity : EntityBase
+public class PlayerEntity : CombatUnitEntity
 {
     PlayerInputManager inputManager;
     private float lastAttackTime = 0.0f;
     public float attackCD = 0.5f;
     public GameObject bulletPrefab;
-    private void Awake()
-    {
-        GF.LogInfo("123");
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Door")
@@ -68,5 +64,30 @@ public class PlayerEntity : EntityBase
     {
         transform.position = pos;
         inputManager.enabled = true;
+    }
+
+    public override bool ApplyDamage(int damgeValue)
+    {
+        var ans = base.ApplyDamage(damgeValue);
+        GF.Event.Fire(PlayerDataChangedEventArgs.EventId, PlayerDataChangedEventArgs.Create(PlayerDataType.Hp, 0, Hp));
+        return ans;
+    }
+
+    public override void ApplyHeal(int healValue)
+    {
+        base.ApplyHeal(healValue);
+        GF.Event.Fire(PlayerDataChangedEventArgs.EventId, PlayerDataChangedEventArgs.Create(PlayerDataType.Hp, 0, Hp));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var item = collision.transform.GetComponent<ItemEntity>();
+        if (item != null)
+        {
+            if(item.Use())
+            {
+                GF.Entity.HideEntity(item.Entity);
+            }
+        }
     }
 }

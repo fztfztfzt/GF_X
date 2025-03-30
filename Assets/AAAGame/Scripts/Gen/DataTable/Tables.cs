@@ -14,11 +14,13 @@ namespace cfg
 public partial class Tables
 {
     public Tbcombat_unit TbcombatUnit {get; }
+    public Tbitem Tbitem {get; }
     public Tbreward Tbreward {get; }
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
         TbcombatUnit = new Tbcombat_unit(loader("tbcombat_unit"));
+        Tbitem = new Tbitem(loader("tbitem"));
         Tbreward = new Tbreward(loader("tbreward"));
         ResolveRef();
     }
@@ -26,6 +28,7 @@ public partial class Tables
     private void ResolveRef()
     {
         TbcombatUnit.ResolveRef(this);
+        Tbitem.ResolveRef(this);
         Tbreward.ResolveRef(this);
     }
 }
